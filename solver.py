@@ -1,21 +1,32 @@
-# Data will be communicated via JSON index 1
-from sat import dpll_sat_solve
+import json
+from pysat.solvers import Solver
 
-def encode_sudoku():
+# Data will be communicated via JSON index 1
+def encode_sudoku(data):
     # Encode the problem using propostional logic, return a list of lists
     # Introducing a variable x_r,c,v. The row r, column c will take value of v.
     # The formula consists of 6 different clauses encoding different aspects of the game
-    ...
+    cnf = clause_one() + clause_two() + clause_three() + clause_four() + clause_five() + clause_six(data)
+    return cnf
 
+def solve_sudoku(cnf):
+    solver = Solver(name="mcb")
+    for cls in cnf:
+        solver.add_clause(cls)
+    if solver.solve():
+        return solver.get_model()
+    return None
 
 def decode_sudoku(sol):
     # Decode the problem to readable data
     res = {}
     for var in sol:
-        key = str(var)[0:2]
-        v = str(var)[2]
-        res[key] = v
-    return res
+        if 111 <= var and var <= 999:
+            key = str(var)[0:2]
+            v = str(var)[2]
+            res[key] = v
+    # return as a JSON string
+    return json.dumps(res)
 
 
 def clause_one():
@@ -26,7 +37,6 @@ def clause_one():
             tmp = [int(f'{r}{c}{v}') for v in range(1, 10)]
             cls.append(tmp)
     return cls
-
 
 def clause_two():
     cls = []
@@ -72,13 +82,14 @@ def clause_five():
                 cls.append(tmp)
     return cls
 
-
 def clause_six(data):
     # The solution with respects the given clues
     cls = []
     for key in data:
         if data[key] != '':
-            cls.append(int(f"{key}{data[key]}"))
+            cls.append([int(f"{key}{data[key]}")])
     return cls
+
+
 
 

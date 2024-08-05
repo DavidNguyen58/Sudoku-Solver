@@ -3,15 +3,15 @@ const screen = document.getElementById("display-target");
 for (let i = 1; i <= 9; i ++){
     screen.innerHTML += 
     `<tr class="align-middle text-center">
-        <th class="square"><input name="row${i}1"></th>
-        <th class="square"><input name="row${i}2"></th>
-        <th class="square"><input name="row${i}3"></th>
-        <th class="square"><input name="row${i}4"></th>
-        <th class="square"><input name="row${i}5"></th>
-        <th class="square"><input name="row${i}6"></th>
-        <th class="square"><input name="row${i}7"></th>
-        <th class="square"><input name="row${i}8"></th>
-        <th class="square"><input name="row${i}9"></th>
+        <th class="square" id="row${i}1"><input name="row${i}1"></th>
+        <th class="square" id="row${i}2"><input name="row${i}2"></th>
+        <th class="square" id="row${i}3"><input name="row${i}3"></th>
+        <th class="square" id="row${i}4"><input name="row${i}4"></th>
+        <th class="square" id="row${i}5"><input name="row${i}5"></th>
+        <th class="square" id="row${i}6"><input name="row${i}6"></th>
+        <th class="square" id="row${i}7"><input name="row${i}7"></th>
+        <th class="square" id="row${i}8"><input name="row${i}8"></th>
+        <th class="square" id="row${i}9"><input name="row${i}9"></th>
     </tr>`
 }
 
@@ -44,4 +44,7 @@ button.addEventListener('click', async (event) => {
     }
     const sol = await res.json()
     console.log(sol)
+    
 })
+
+// render the solution on the screen
