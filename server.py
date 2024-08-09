@@ -10,12 +10,10 @@ def index():
         content_type = request.headers.get('Content-Type')
         if (content_type == 'application/json'):
             data = request.json # Get the json in dictionary format
-            data = json.dumps(data)
             cnf = encode_sudoku(data)
             raw = solve_sudoku(cnf)
             sol = decode_sudoku(raw)
-            return sol
-            # Response back to the client
+            return jsonify(sol)
     else:
         return render_template('index.html')
     

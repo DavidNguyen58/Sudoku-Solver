@@ -39,12 +39,21 @@ button.addEventListener('click', async (event) => {
         }
     );
     if (!res.ok) {
-        const message = `An error has occured: ${response.status}`;
+        const message = `An error has occured: ${res.status}`;
         throw new Error(message);
     }
     const sol = await res.json()
     console.log(sol)
-    
+    render_solution(sol)
 })
 
 // render the solution on the screen
+function render_solution(data){
+    for(let i = 1; i <= 9; i++){
+        for(let j = 1; j <= 9; j++){
+            let index = `${i}${j}`
+            const cell = document.getElementById(`row${index}`)
+            cell.innerHTML = data[index]
+        }
+    }
+}

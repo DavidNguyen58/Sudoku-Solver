@@ -20,13 +20,15 @@ def solve_sudoku(cnf):
 def decode_sudoku(sol):
     # Decode the problem to readable data
     res = {}
+    if sol == None:
+        return None
     for var in sol:
         if 111 <= var and var <= 999:
             key = str(var)[0:2]
             v = str(var)[2]
             res[key] = v
     # return as a JSON string
-    return json.dumps(res)
+    return res
 
 
 def clause_one():
@@ -39,13 +41,14 @@ def clause_one():
     return cls
 
 def clause_two():
+    # Each cell contains at most 1 number
     cls = []
     for r in range(1, 10):
         for c in range(1, 10):
-            for v in range(1, 10):
-                for n in range(v + 1, 10):
-                    x = f'-{r}{c}{v}'
-                    y = f'-{r}{c}{n}'
+            for i in range(1, 10):
+                for j in range(i + 1, 10):
+                    x = f'-{r}{c}{i}'
+                    y = f'-{r}{c}{j}'
                     cls.append([int(x), int(y)])
     return cls
 
@@ -56,6 +59,16 @@ def clause_three():
         for v in range(1, 10):
             tmp = [int(f'{r}{c}{v}') for c in range(1, 10)]
             cls.append(tmp)
+    # Each row must contain all distinct integers
+    """
+    for r in range(1, 10):
+        for v in range(1, 10):
+            for i in range(1, 10):
+                for j in range(i + 1, 10):
+                    x = f'-{r}{i}{v}'
+                    y = f'-{r}{j}{v}'
+                    cls.append([int(x), int(y)])
+    """
     return cls
 
 def clause_four():
@@ -63,8 +76,18 @@ def clause_four():
     cls = []
     for c in range(1, 10):
         for v in range(1, 10):
-            tmp = [int(f'{c}{r}{v}') for r in range(1, 10)]
+            tmp = [int(f'{r}{c}{v}') for r in range(1, 10)]
             cls.append(tmp)
+    # Each column must contain all distinct integers
+    """
+    for c in range(1, 10):
+        for v in range(1, 10):
+            for i in range(1, 10):
+                for j in range(i + 1, 10):
+                    x = f'-{i}{c}{v}'
+                    y = f'-{j}{c}{v}'
+                    cls.append([int(x), int(y)])
+    """
     return cls
 
 def clause_five():
@@ -80,10 +103,12 @@ def clause_five():
                         b = 3*c + j
                         tmp.append(int(f'{a}{b}{n}'))
                 cls.append(tmp)
+    # Each subgrid contains all the distinct numbers
     return cls
 
 def clause_six(data):
     # The solution with respects the given clues
+    # Data will be stored in a Python dictionary
     cls = []
     for key in data:
         if data[key] != '':
