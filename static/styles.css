@@ -12,3 +12,17 @@ input{
   width: 3rem;
   height: 3rem;
 }
+
+#row13, #row23, #row33, #row43, #row53, #row63, #row73, #row83, #row93{
+  border-right: 2px solid black;
+}
+#row16, #row26, #row36, #row46, #row56, #row66, #row76, #row86, #row96{
+  border-right: 2px solid black;
+}
+#row31, #row32, #row33, #row34, #row35, #row36, #row37, #row38, #row39{
+  border-bottom: 2px solid black;
+}
+#row61, #row62, #row63, #row64, #row65, #row66, #row67, #row68, #row69{
+  border-bottom: 2px solid black;
+}
+

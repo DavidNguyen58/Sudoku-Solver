@@ -1,0 +1,4 @@
+# my virtualenvironment folder is called venv 😅
+.venv
+
+*.pyc
