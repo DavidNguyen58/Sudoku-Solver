@@ -15,7 +15,10 @@ input{
   caret-color: transparent;
 }
 input:focus{
-  background-color: yellow;
+  background-color: #e0e0e0;
+}
+input:hover{
+  background-color: #e0e0e0;
 }
 input::selection{
   background-color: transparent;
