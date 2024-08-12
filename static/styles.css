@@ -5,20 +5,37 @@ h1{
   font-weight: 700;
 }
 input{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  vertical-align: middle;
+  line-height: normal;
+  caret-color: transparent;
+}
+input:focus{
+  background-color: yellow;
+}
+input::selection{
+  background-color: transparent;
 }
 .square{
   width: 3rem;
   height: 3rem;
+  padding: 0 !important;
+  margin: 0;
 }
 
+/* vertical lines */
 #row13, #row23, #row33, #row43, #row53, #row63, #row73, #row83, #row93{
   border-right: 2px solid black;
 }
 #row16, #row26, #row36, #row46, #row56, #row66, #row76, #row86, #row96{
   border-right: 2px solid black;
 }
+
+/* horizontal lines */
 #row31, #row32, #row33, #row34, #row35, #row36, #row37, #row38, #row39{
   border-bottom: 2px solid black;
 }
@@ -26,3 +43,16 @@ input{
   border-bottom: 2px solid black;
 }
 
+/* outside border */
+#row11, #row12, #row13, #row14, #row15, #row16, #row17, #row18, #row19{
+  border-top: 2px solid black;
+}
+#row91, #row92, #row93, #row94, #row95, #row96, #row97, #row98, #row99{
+  border-bottom: 2px solid black;
+}
+#row11, #row21, #row31, #row41, #row51, #row61, #row71, #row81, #row91{
+  border-left: 2px solid black;
+}
+#row19, #row29, #row39, #row49, #row59, #row69, #row79, #row89, #row99{
+  border-right: 2px solid black;
+}   
