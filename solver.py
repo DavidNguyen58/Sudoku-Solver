@@ -6,11 +6,16 @@ def encode_sudoku(data):
     # Encode the problem using propostional logic, return a list of lists
     # Introducing a variable x_r,c,v. The row r, column c will take value of v.
     # The formula consists of 6 different clauses encoding different aspects of the game
-    cnf = clause_one() + clause_two() + clause_three() + clause_four() + clause_five() + clause_six(data)
+    tmp = clause_six(data)
+    if tmp == None:
+        return None
+    cnf = clause_one() + clause_two() + clause_three() + clause_four() + clause_five() + tmp
     return cnf
 
 def solve_sudoku(cnf):
     solver = Solver(name="mcb")
+    if cnf == None:
+        return None
     for cls in cnf:
         solver.add_clause(cls)
     if solver.solve():
@@ -110,9 +115,14 @@ def clause_six(data):
     # The solution with respects the given clues
     # Data will be stored in a Python dictionary
     cls = []
+    count = 0
     for key in data:
         if data[key] != '':
+            count += 1
             cls.append([int(f"{key}{data[key]}")])
+    # Sudoku problem is only solvable if there is 17 clues on the board
+    if count < 17:
+        return None
     return cls
 
 
