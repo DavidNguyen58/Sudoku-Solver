@@ -16,10 +16,25 @@ flask --app server run
 ```
 ## Test
 
-## License
+## API
+
+### POST /
+* Content-Type: application/json
+*   ```javascript
+    // Sucessful Response
+    {
+        "11": $value,
+        "12": $value,
+        ...
+        "99": $value
+    }
+    ```
+    #### Error Handling
+* HTTP 400 Bad Request
+    - The problem can not be solved
 
 ## Reference
 - https://users.aalto.fi/~tjunttil/2020-DP-AUT/notes-sat/solving.html
 - https://sat.inesc-id.pt/~ines/publications/aimath06.pdf
--  https://repository.vnu.edu.vn/bitstream/VNU_123/17423/1/00050007752.pdf
+- https://repository.vnu.edu.vn/bitstream/VNU_123/17423/1/00050007752.pdf
 

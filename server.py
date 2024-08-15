@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, abort
 import json
 from solver import *
 
@@ -13,7 +13,9 @@ def index():
             cnf = encode_sudoku(data)
             raw = solve_sudoku(cnf)
             sol = decode_sudoku(raw)
-            return jsonify(sol)
+            if sol:
+                return jsonify(sol, status=200)
+            abort(400) # The sudoku is not solvable
     else:
         return render_template('index.html')
     
